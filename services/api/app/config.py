@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     jwt_secret: str = Field(default="change-me")
     jwt_issuer: str = "security-pr-copilot"
     access_token_expire_minutes: int = 120
-    api_cors_origins: str = "http://localhost:3000"
+    api_cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
 
     database_url: str = "postgresql+psycopg://copilot:copilot@localhost:5432/security_pr_copilot"
     redis_url: str = "redis://localhost:6379/0"
