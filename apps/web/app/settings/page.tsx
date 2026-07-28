@@ -52,6 +52,7 @@ export default function SettingsPage() {
 
       <section className="card" style={{ marginTop: 14 }}>
         <h2>Environment Checklist</h2>
+        <div className="table-scroll" role="region" aria-label="Environment checklist" tabIndex={0}>
         <table className="table">
           <thead>
             <tr>
@@ -78,8 +79,8 @@ export default function SettingsPage() {
             </tr>
           </tbody>
         </table>
+        </div>
       </section>
     </>
   );
 }
-

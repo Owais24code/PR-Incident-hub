@@ -49,6 +49,7 @@ export default function AuditLogPage() {
       {error ? <div className="error">{error}</div> : null}
       {loading ? <p className="muted">Loading audit log...</p> : null}
 
+      <div className="table-scroll" role="region" aria-label="Audit log entries" tabIndex={0}>
       <table className="table">
         <thead>
           <tr>
@@ -84,7 +85,7 @@ export default function AuditLogPage() {
           ) : null}
         </tbody>
       </table>
+      </div>
     </>
   );
 }
-

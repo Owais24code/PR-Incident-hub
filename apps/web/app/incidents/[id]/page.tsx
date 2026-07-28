@@ -163,6 +163,7 @@ export default function IncidentDetailPage() {
           <section className="card">
             <h2>Evidence</h2>
             {incident.evidence.length ? (
+              <div className="table-scroll" role="region" aria-label="Incident evidence" tabIndex={0}>
               <table className="table">
                 <thead>
                   <tr>
@@ -183,6 +184,7 @@ export default function IncidentDetailPage() {
                   ))}
                 </tbody>
               </table>
+              </div>
             ) : (
               <p className="muted">No enrichment evidence stored yet.</p>
             )}
@@ -197,4 +199,3 @@ export default function IncidentDetailPage() {
     </>
   );
 }
-

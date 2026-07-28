@@ -20,7 +20,7 @@ export default function LoginPage() {
     try {
       const response = await api.login(email, password);
       setToken(response.access_token);
-      router.push("/incidents");
+      router.push("/analytics");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {
@@ -39,15 +39,26 @@ export default function LoginPage() {
         <h1>Security PR Copilot</h1>
         <p className="muted">Sign in to triage alerts, approve actions, and create Jira work.</p>
         <form className="form" onSubmit={submit}>
-          {error ? <div className="error">{error}</div> : null}
+          {error ? <div className="error" role="alert">{error}</div> : null}
           <label className="field">
             Email
-            <input className="input" value={email} onChange={(event) => setEmail(event.target.value)} />
+            <input
+              autoComplete="email"
+              className="input"
+              name="email"
+              required
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </label>
           <label className="field">
             Password
             <input
               className="input"
+              autoComplete="current-password"
+              name="password"
+              required
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}

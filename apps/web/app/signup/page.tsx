@@ -22,7 +22,7 @@ export default function SignupPage() {
     try {
       const response = await api.register(tenantName, name, email, password);
       setToken(response.access_token);
-      router.push("/incidents");
+      router.push("/analytics");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Signup failed");
     } finally {
@@ -41,23 +41,27 @@ export default function SignupPage() {
         <h1>Start turning alerts into approved work.</h1>
         <p className="muted">Create a tenant, invite your team later, and land directly in the incident console.</p>
         <form className="form" onSubmit={submit}>
-          {error ? <div className="error">{error}</div> : null}
+          {error ? <div className="error" role="alert">{error}</div> : null}
           <label className="field">
             Workspace
-            <input className="input" value={tenantName} onChange={(event) => setTenantName(event.target.value)} />
+            <input autoComplete="organization" className="input" name="organization" required value={tenantName} onChange={(event) => setTenantName(event.target.value)} />
           </label>
           <label className="field">
             Your Name
-            <input className="input" value={name} onChange={(event) => setName(event.target.value)} />
+            <input autoComplete="name" className="input" name="name" required value={name} onChange={(event) => setName(event.target.value)} />
           </label>
           <label className="field">
             Email
-            <input className="input" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+            <input autoComplete="email" className="input" name="email" required type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
           </label>
           <label className="field">
             Password
             <input
               className="input"
+              autoComplete="new-password"
+              minLength={10}
+              name="password"
+              required
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}

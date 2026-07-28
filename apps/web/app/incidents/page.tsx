@@ -17,7 +17,7 @@ export default function IncidentsPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
-  async function load() {
+  async function load(queryOverride?: string) {
     if (!getToken()) {
       router.push("/login");
       return;
@@ -26,7 +26,8 @@ export default function IncidentsPage() {
     setError("");
     try {
       const params = new URLSearchParams();
-      if (q) params.set("q", q);
+      const activeQuery = queryOverride ?? q;
+      if (activeQuery) params.set("q", activeQuery);
       if (status) params.set("status", status);
       if (severity) params.set("severity", severity);
       const suffix = params.size ? `?${params.toString()}` : "";
@@ -39,7 +40,9 @@ export default function IncidentsPage() {
   }
 
   useEffect(() => {
-    void load();
+    const initialQuery = new URLSearchParams(window.location.search).get("q") ?? "";
+    setQ(initialQuery);
+    void load(initialQuery);
   }, []);
 
   return (
@@ -84,6 +87,7 @@ export default function IncidentsPage() {
       {error ? <div className="error">{error}</div> : null}
       {loading ? <p className="muted">Loading incidents...</p> : null}
 
+      <div className="table-scroll" role="region" aria-label="Incident results" tabIndex={0}>
       <table className="table">
         <thead>
           <tr>
@@ -123,7 +127,7 @@ export default function IncidentsPage() {
           ) : null}
         </tbody>
       </table>
+      </div>
     </>
   );
 }
-
