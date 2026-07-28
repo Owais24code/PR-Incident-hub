@@ -30,6 +30,10 @@ export default function LoginPage() {
   return (
     <main className="login-wrap">
       <section className="login-card">
+        <div className="status-row" aria-label="Console status">
+          <span>SOC CONSOLE</span>
+          <span className="signal">SECURE</span>
+        </div>
         <p className="eyebrow">Developer-ready security response</p>
         <h1>Security PR Copilot</h1>
         <p className="muted">Sign in to triage alerts, approve actions, and create Jira work.</p>
@@ -57,4 +61,3 @@ export default function LoginPage() {
     </main>
   );
 }
-

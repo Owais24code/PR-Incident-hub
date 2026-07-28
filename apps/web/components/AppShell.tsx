@@ -31,6 +31,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Activity size={24} aria-hidden />
           <span>Security PR Copilot</span>
         </Link>
+        <div className="sidebar-status" aria-label="System status">
+          <div className="status-row">
+            <span>API</span>
+            <span className="signal">ONLINE</span>
+          </div>
+          <div className="status-row">
+            <span>QUEUE</span>
+            <span className="signal">ARMED</span>
+          </div>
+        </div>
         <nav className="nav">
           {nav.map((item) => {
             const Icon = item.icon;
@@ -54,4 +64,3 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
