@@ -36,6 +36,11 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 export const api = {
+  register: (tenant_name: string, name: string, email: string, password: string) =>
+    request<AuthResponse>("/auth/register", {
+      method: "POST",
+      body: JSON.stringify({ tenant_name, name, email, password })
+    }),
   login: (email: string, password: string) =>
     request<AuthResponse>("/auth/login", {
       method: "POST",

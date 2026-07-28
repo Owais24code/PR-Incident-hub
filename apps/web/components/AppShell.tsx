@@ -1,12 +1,13 @@
 "use client";
 
-import { Activity, FileSearch, KeyRound, LogOut, Settings, ShieldAlert } from "lucide-react";
+import { Activity, BarChart3, FileSearch, KeyRound, LogOut, Settings, ShieldAlert } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { clearToken, getToken } from "@/lib/api";
 
 const nav = [
   { href: "/incidents", label: "Incidents", icon: ShieldAlert },
+  { href: "/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/integrations", label: "Integrations", icon: KeyRound },
   { href: "/audit-log", label: "Audit Log", icon: FileSearch },
   { href: "/settings", label: "Settings", icon: Settings }
@@ -15,14 +16,14 @@ const nav = [
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const isLogin = pathname === "/login";
+  const isPublic = pathname === "/" || pathname === "/login" || pathname === "/signup";
 
   function signOut() {
     clearToken();
     router.push("/login");
   }
 
-  if (isLogin) return <>{children}</>;
+  if (isPublic) return <>{children}</>;
 
   return (
     <div className="app-shell">

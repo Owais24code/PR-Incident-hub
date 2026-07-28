@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldCheck } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { api, setToken } from "@/lib/api";
@@ -57,6 +58,9 @@ export default function LoginPage() {
             <span>{loading ? "Signing In" : "Sign In"}</span>
           </button>
         </form>
+        <p className="auth-switch">
+          New workspace? <Link href="/signup">Create an account</Link>
+        </p>
       </section>
     </main>
   );
