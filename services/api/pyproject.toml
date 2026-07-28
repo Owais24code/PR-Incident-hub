@@ -1,0 +1,43 @@
+[project]
+name = "security-pr-copilot-api"
+version = "0.1.0"
+description = "FastAPI backend and worker for Security PR Copilot"
+requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.13.2",
+  "boto3>=1.34.150",
+  "email-validator>=2.2.0",
+  "fastapi>=0.111.0",
+  "httpx>=0.27.0",
+  "openai>=1.40.0",
+  "argon2-cffi>=23.1.0",
+  "psycopg[binary]>=3.2.1",
+  "pydantic-settings>=2.4.0",
+  "pyjwt>=2.8.0",
+  "python-multipart>=0.0.9",
+  "redis>=5.0.8",
+  "rq>=1.16.2",
+  "sqlalchemy>=2.0.31",
+  "uvicorn[standard]>=0.30.3"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.2",
+  "pytest-mock>=3.14.0",
+  "ruff>=0.5.5"
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+ignore = ["B008"]
+
+[tool.setuptools]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
