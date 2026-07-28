@@ -12,8 +12,8 @@ build/
 coverage/
 *.pyc
 *.log
+*.tsbuildinfo
 .DS_Store
 minio-data/
 postgres-data/
 redis-data/
-
