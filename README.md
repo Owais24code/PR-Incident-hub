@@ -53,7 +53,7 @@ Security PR Copilot is a narrow B2B devtool that turns security alerts into deve
    npm run dev:web
    ```
 
-The dashboard runs at `http://localhost:3000`; the API runs at `http://localhost:8000`.
+The dashboard runs at `http://localhost:3000`; the API runs at `http://localhost:8000`; the MinIO console runs at `http://localhost:9003`.
 
 ## Demo Login
 
@@ -94,4 +94,3 @@ cd services/api; alembic upgrade head
 
 - System design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - Security review: [docs/SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md)
-
