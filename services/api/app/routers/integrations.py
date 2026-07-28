@@ -11,13 +11,26 @@ from app.services.audit import write_audit
 router = APIRouter(prefix="/integrations", tags=["integrations"])
 
 SECRET_KEYS = {"token", "api_token", "secret", "password", "client_secret", "signing_secret"}
+REDACTED_VALUE = "***redacted***"
+
+
+def merge_integration_config(current: dict, patch: dict) -> dict:
+    merged = dict(current or {})
+    for key, value in patch.items():
+        if value == REDACTED_VALUE and key in merged:
+            continue
+        if value is None:
+            merged.pop(key, None)
+        else:
+            merged[key] = value
+    return merged
 
 
 def _safe_integration(integration: Integration) -> IntegrationOut:
     config = {}
     for key, value in (integration.config_json or {}).items():
         if any(secret_key in key.lower() for secret_key in SECRET_KEYS):
-            config[key] = "***redacted***"
+            config[key] = REDACTED_VALUE
         else:
             config[key] = value
     return IntegrationOut(
@@ -87,7 +100,10 @@ def update_integration(
     if payload.status is not None:
         integration.status = payload.status
     if payload.config_json is not None:
-        integration.config_json = payload.config_json
+        integration.config_json = merge_integration_config(
+            integration.config_json or {},
+            payload.config_json,
+        )
 
     write_audit(
         db,
